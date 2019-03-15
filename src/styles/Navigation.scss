@@ -1,0 +1,23 @@
+@import 'Colors.scss';
+
+.Navigation {
+    background-color: $purple;
+  
+    .title {
+      color: white;
+      margin-bottom: 0px;
+    }
+   
+    a {
+      text-decoration: none;
+    }
+  
+    a,
+    a:visited {
+      color: #ffffff;
+    }
+  
+    a:hover {
+      color: #525dce;
+    }
+  }
