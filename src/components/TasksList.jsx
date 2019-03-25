@@ -1,7 +1,8 @@
-import React from "react";
-import Task from "./Task";
-import { Header, Button } from "semantic-ui-react";
-import NewTask from "./NewTask";
+import React from 'react';
+import Task from './Task';
+import { Header, Button } from 'semantic-ui-react';
+import NewTask from './NewTask';
+import EditTask from "./EditTask";
 
 const TasksList = ({
   title,
@@ -9,9 +10,9 @@ const TasksList = ({
   isCompleted,
   handleCompletedTask,
   completedList,
-  handleDeleteCompleteTasks,
-  handleEditTask,
-  handleNewTask
+  handleDeleteCompletedTasks,
+  handleChangeTaskToEdit,
+  handleEditTaskContent
 }) => {
   if (tasks.length > 0) {
     return (
@@ -23,7 +24,7 @@ const TasksList = ({
               basic
               color="red"
               content="Delete completed tasks"
-              onClick={handleDeleteCompleteTasks}
+              onClick={handleDeleteCompletedTasks}
             />
           ) : null}
         </div>
@@ -32,16 +33,22 @@ const TasksList = ({
             return (
               <Task
                 style={{
-                  backgroundColor: isCompleted ? "#93FF96" : "white"
+                  backgroundColor: isCompleted ? '#93FF96' : 'white'
                 }}
                 key={task.id}
                 task={task}
                 handleCompletedTask={handleCompletedTask}
-                handleEditTask={handleEditTask}
+                handleChangeTaskToEdit={handleChangeTaskToEdit}
               />
             );
           } else {
-            return <NewTask task={task} title={"Change task"} handleNewTask={handleNewTask} />;
+            return (
+              <EditTask
+                task={task}
+                title={'Change task'}
+                handleEditTaskContent={handleEditTaskContent}
+              />
+            );
           }
         })}
       </div>

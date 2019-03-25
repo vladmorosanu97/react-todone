@@ -64,16 +64,26 @@ class App extends Component {
     }));
   };
 
-  handleDeleteCompleteTasks = () => {
+  handleDeleteCompletedTasks = () => {
     this.setState({
       completedTasks: []
     });
   };
 
-  handleEditTask = (taskId) => {
-    debugger
+  handleChangeTaskToEdit = (taskId) => {
     const { tasks } = this.state;
     tasks.filter(el => el.id === taskId)[0].isEdited = true;
+    this.setState((prevState, props) => ({
+      tasks: tasks
+    }));
+  }
+
+  handleEditTaskContent = (task) => {
+    debugger
+    const { tasks } = this.state;
+    let item = tasks.filter(el => el.id === task.id)[0]
+    item.isEdited = false;
+    item.text = task.text;
     this.setState((prevState, props) => ({
       tasks: tasks
     }));
@@ -88,16 +98,15 @@ class App extends Component {
           <TasksList
             handleCompletedTask={this.handleCompletedTask}
             completedList={false}
-            handleEditTask={this.handleEditTask}
+            handleChangeTaskToEdit={this.handleChangeTaskToEdit}
+            handleEditTaskContent={this.handleEditTaskContent}
             title="Active Tasks"
             tasks={tasks}
-            handleNewTask={this.handleNewTask}
           />
           <TasksList
-            handleDeleteCompleteTasks={this.handleDeleteCompleteTasks}
+            handleDeleteCompletedTasks={this.handleDeleteCompletedTasks}
             handleCompletedTask={this.handleCompletedTask}
             completedList={true}
-            handleNewTask={this.handleNewTask}
             title="Completed Tasks"
             tasks={completedTasks}
           />

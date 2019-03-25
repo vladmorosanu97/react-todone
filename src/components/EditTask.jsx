@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Form, TextArea, Header, Button, Divider } from 'semantic-ui-react';
+import { Header, Divider, TextArea, Button, Form } from 'semantic-ui-react';
 
-class NewTask extends Component {
+export default class EditTask extends Component {
   state = {
-    id: Math.random() * 1000000,
-    text: '',
-    date: '',
-    dayOfTheWeek: ''
+    ...this.props.task
   };
 
   setText = value => {
@@ -21,11 +18,12 @@ class NewTask extends Component {
 
   handleOnSubmit = () => {
     let localTask = this.state;
+
     localTask.date = new Date().toLocaleDateString();
     localTask.dayOfTheWeek = new Date().getDay();
     localTask.isEdited = false;
 
-    this.props.handleNewTask(localTask);
+    this.props.handleEditTaskContent(localTask);
     this.clearText();
   };
 
@@ -55,5 +53,3 @@ class NewTask extends Component {
     );
   }
 }
-
-export default NewTask;
